@@ -27,8 +27,12 @@
     "maplephp/dto": "^3.0"
   },
   "autoload": {
+    "files": [
+      "src/Setup/aliases.php"
+    ],
     "psr-4": {
-      "MaplePHP\\Container\\": ""
+      "Psr\\Container\\": "src/Interfaces/",
+      "MaplePHP\\Container\\": "src"
     }
   },
   "minimum-stability": "dev"

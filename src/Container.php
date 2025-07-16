@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace MaplePHP\Container;
 
 use Closure;
-use MaplePHP\Container\Interfaces\ContainerInterface;
+use MaplePHP\Container\Interfaces\AutowireInterface;
+use Psr\Container\ContainerInterface;
 use MaplePHP\Container\Interfaces\FactoryInterface;
 use MaplePHP\DTO\Format\Arr;
 //use MaplePHP\Container\Reflection;
@@ -112,27 +113,26 @@ class Container implements ContainerInterface, FactoryInterface
 
     /**
      * Get a container or factory
-     * @param string $identifier [description]
-     * @param array $args Is possible to overwrite/add __construct or method argumnets
-     * @return mixed
+     * @template T of object
+     * @param class-string<T>|string $identifier The class or service identifier
+     * @param string $identifier
+     * @param array $args Is possible to overwrite/add __construct or method arguments
+     * @return T
      * @throws ReflectionException
      */
     public function get(string $identifier, array $args = []): mixed
     {
-        if ($service = $this->getService($identifier)) {
+        $service = $this->getService($identifier);
+        if (isset($service)) {
             if (count($args) === 0) {
                 $args = $this->getArgs($identifier);
             }
             if ($this->isFactory($identifier)) {
                 $this->getter[$identifier] = $service(...$args);
             } else {
-                if (empty($this->getter[$identifier])) {
-                    if (is_string($service) && class_exists($service)) {
-                        $reflect = new Reflection($service);
-                        if (count($args) > 0) {
-                            $reflect->setArgs($args);
-                        }
-                        $this->getter[$identifier] = $reflect->get();
+                if (!isset($this->getter[$identifier])) {
+                    if ($service instanceof AutowireInterface) {
+                        $this->getter[$identifier] = $service->run();
                     } else {
                         $this->getter[$identifier] = $service;
                     }

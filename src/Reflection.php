@@ -307,6 +307,15 @@ class Reflection
     }
 
     /**
+     * Check if args has been initiated
+     * @return bool
+     */
+    public function hasArgs(): bool
+    {
+        return (is_array($this->args) && count($this->args) > 0);
+    }
+
+    /**
      * Access reflection class
      * @return ReflectionClass
      */
