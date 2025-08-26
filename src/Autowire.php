@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MaplePHP\Container;
 
 use MaplePHP\Container\Interfaces\AutowireInterface;
 
 class Autowire implements AutowireInterface
 {
-
     private Reflection $reflect;
     /**
      * @var mixed|object|null
@@ -52,7 +53,7 @@ class Autowire implements AutowireInterface
      */
     public function addArgs(array $args): self
     {
-        if(count($args) <= 0) {
+        if (count($args) <= 0) {
             throw new \InvalidArgumentException("You must provide at least one argument.");
         }
         $inst = $this->disableDI();

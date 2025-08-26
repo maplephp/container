@@ -6,7 +6,7 @@ namespace MaplePHP\Container;
 
 use Closure;
 use MaplePHP\Container\Interfaces\AutowireInterface;
-use Psr\Container\ContainerInterface;
+use MaplePHP\Container\Interfaces\ContainerInterface;
 use MaplePHP\Container\Interfaces\FactoryInterface;
 use MaplePHP\DTO\Format\Arr;
 //use MaplePHP\Container\Reflection;

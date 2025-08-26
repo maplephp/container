@@ -1,7 +1,7 @@
 {
   "name": "maplephp/container",
   "type": "library",
-  "version": "v1.1.4",
+  "version": "v2.0.0",
   "description": "Container, Factories and dependency injectors with full PSR-11 support.",
   "keywords": [
     "container",
@@ -27,11 +27,7 @@
     "maplephp/dto": "^3.0"
   },
   "autoload": {
-    "files": [
-      "src/Setup/aliases.php"
-    ],
     "psr-4": {
-      "Psr\\Container\\": "src/Interfaces/",
       "MaplePHP\\Container\\": "src"
     }
   },

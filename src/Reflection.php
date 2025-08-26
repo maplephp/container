@@ -241,9 +241,13 @@ class Reflection
         if ($this->allowInterfaces) {
             if (self::$interfaceFactory !== null) {
                 foreach (self::$interfaceFactory as $call) {
-                    self::$class[$classNameA] = $call($inst->getShortName(), $classNameA, $inst);
+                    $getter = $call($inst->getShortName(), $classNameA, $inst);
+                    if($getter !== null) {
+                        self::$class[$classNameA] = $call($inst->getShortName(), $classNameA, $inst);
+                    }
                 }
             }
+
         } else {
             self::$class[$classNameA] = null;
         }
