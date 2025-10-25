@@ -35,10 +35,10 @@ class Container implements ContainerInterface, FactoryInterface
      *                                  TestClasses\Test::class,
      *                                  TestClasses\Test::class."::__construct",
      *                                  TestClasses\Test::class."::getStaticMethod",
-     * @param array|null   $args        Pass argumnets to constructor staticMethod if you choose.
+     * @param array|null   $args        Pass arguments to constructor staticMethod if you choose.
      * @param bool $overwrite   Will throw exception if already been defined if not arg is set to TRUE.
      */
-    public function set(string $identifier, $value, ?array $args = null, bool $overwrite = false): ContainerInterface
+    public function set(string $identifier, mixed $value, ?array $args = null, bool $overwrite = false): ContainerInterface
     {
         if (!$overwrite && $this->has($identifier)) {
             $type = ($this->isFactory($identifier)) ? "factory" : "container";

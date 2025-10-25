@@ -187,7 +187,10 @@ class Reflection
                             self::$class[$classNameA] = $this->newInstance($inst, (bool)$constructor, $_args);
                         }
                     }
-                    $_args[] = self::$class[$classNameA];
+                    if (isset(self::$class[$classNameA])) {
+                        $_args[] = self::$class[$classNameA];
+                    }
+
                 }
             }
         }
