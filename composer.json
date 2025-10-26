@@ -22,9 +22,9 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "psr/container": "^2.0",
-    "maplephp/dto": "^3.0"
+    "maplephp/dto": "^3.1"
   },
   "autoload": {
     "psr-4": {
