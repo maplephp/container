@@ -14,10 +14,14 @@ Container, Factories and dependency injectors will help to make your PHP code mo
 Containers allowing you to easily create and retrieve objects that are needed throughout your application.
 ```php
 use MaplePHP\Container\Container;
+
 $container = new Container();
-$container->set("YourClass", \YourNamespace\To\YourClass::class); // Bind "YourClass" to container and dependency injector
-$yourClass = $container->get("YourClass")->get(); // Will return "YourClass"
-//$yourClass->yourClassMehthod();
+
+// You can set mixed values in the container
+$container->set("hasEmail", true);
+
+$hasEmail = $container->get("hasEmail")->get();
+var_dump($hasEmail); // Result in: (bool) true
 ```
 If the constructor of "YourClass" contains unresolved class arguments, the dependency injector will attempt to automatically locate them for you. Read more under the headline **dependency injector**.
 
@@ -40,32 +44,16 @@ Take a look at this example
 
 ```php
 
-$container->set("YourClass", \YourNamespace\To\YourClass::class);
-$testService = $container->get("YourClass");
-echo $testService->start();
+use MaplePHP\Container\Container;
+use MaplePHP\Container\Autowire;
+use App\Services\MailService;
 
-```
-The above code will load **YourClass** and auto initialize the class **Test**.
+$container = new Container();
+$container->set("MailService", new Autowire(MailService::class));
 
-```php
-namespace YourNamespace\To;
-
-use YourNamespace\ToTestClasses\Test;
-
-class YourClass {
-    
-    private $test;
-
-    // Dependency injector will auto load "Test" class and the "Test" classes and so on.
-    function __construct(Test $test) {
-        $this->test = $test;
-    }
-
-    function start() {
-        return $this->test->get("This is the start page");
-    }
-    
-}
+// This will return "MailService" with all dependencies resolved on constructor
+$mailService = $container->get("MailService")->get();
+echo $mailService->send();
 ```
 
 ## Event handler

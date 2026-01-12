@@ -3,7 +3,7 @@
 namespace MaplePHP\Container\Exceptions;
 
 use InvalidArgumentException;
-use MaplePHP\Container\Interfaces\ContainerExceptionInterface;
+use Psr\Container\ContainerExceptionInterface;
 
 /**
  * Base interface representing a generic exception in a container.

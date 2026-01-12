@@ -2,7 +2,7 @@
 
 namespace MaplePHP\Container\Exceptions;
 
-use MaplePHP\Container\Interfaces\NotFoundExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use RuntimeException;
 
 /**

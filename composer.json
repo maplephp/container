@@ -1,11 +1,10 @@
 {
   "name": "maplephp/container",
   "type": "library",
-  "version": "v1.1.4",
   "description": "Container, Factories and dependency injectors with full PSR-11 support.",
   "keywords": [
     "container",
-    "psr11",
+    "PSR-11",
     "factories",
     "dependency injectors",
     "injectors"
@@ -23,12 +22,13 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
-    "maplephp/dto": "^3.0"
+    "php": ">=8.2",
+    "psr/container": "^2.0",
+    "maplephp/dto": "^3.1"
   },
   "autoload": {
     "psr-4": {
-      "MaplePHP\\Container\\": ""
+      "MaplePHP\\Container\\": "src"
     }
   },
   "minimum-stability": "dev"

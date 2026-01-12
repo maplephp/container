@@ -51,18 +51,18 @@ class EventHandler
     public function addEvent(callable|object|string $event, ?string $bind = null): void
     {
 
-        if(!is_callable($event)) {
-            if(is_string($event)) {
+        if (!is_callable($event)) {
+            if (is_string($event)) {
                 $reflect = new Reflection($event);
                 $event = $reflect->get();
             }
 
-            if(is_object($event) && !($event instanceof EventInterface)) {
+            if (is_object($event) && !($event instanceof EventInterface)) {
                 throw new Exception("Event object/class needs to be instance of \"EventInterface\"!", 1);
             }
         }
 
-        if (is_null($bind)) {
+        if ($bind === null) {
             $this->event[] = $event;
         } else {
             $this->event[] = [$bind => $event];
@@ -95,7 +95,7 @@ class EventHandler
                 throw new BadMethodCallException("The method \"".$method."\" does not exist in the class (" . $handler[0]::class . ")", 1);
             }
             */
-            if (is_null($handler[1][0]) || in_array($method, $handler[1])) {
+            if ($handler[1][0] === null || in_array($method, $handler[1])) {
                 $this->bindable[$method] = $method;
             }
             $data = call_user_func_array([$handler[0], $method], $args);
@@ -136,7 +136,7 @@ class EventHandler
      */
     final protected function getEvent(callable|object $data): void
     {
-        if(is_callable($data)) {
+        if (is_callable($data)) {
             $data();
         } else {
             $data->resolve();
