@@ -74,4 +74,25 @@ class Autowire implements AutowireInterface
         }
         return $this->class;
     }
+
+	/**
+	 * Will wire the interface to the expected instance
+	 *
+	 * @param array $bindings
+	 * @return void
+	 */
+	public static function interfaceWiring(array $bindings): void
+	{
+		Reflection::interfaceFactory(function (string $className) use ($bindings) {
+			$instance = $bindings[$className] ?? null;
+			if (is_callable($instance)) {
+				$instance = $instance();
+			}
+			if(is_string($instance)) {
+				$di = new self($instance);
+				$instance = $di->run();
+			}
+			return $instance;
+		});
+	}
 }
